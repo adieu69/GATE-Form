@@ -1,0 +1,28 @@
+<?php
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Get form data
+    $fullname = $_POST["fullname"];
+    $email = $_POST["email"];
+    $phone = $_POST["phone"];
+    $college = $_POST["college"];
+    $year = $_POST["year"];
+    $whyInterested = $_POST["why_interested"];
+
+    // Create a string with the form data
+    $formData = "Full Name: $fullname\nEmail: $email\nPhone: $phone\nCollege: $college\nYear: $year\nWhy Interested: $whyInterested\n\n";
+
+    // Open the file for writing (you may need to set the correct path)
+    $file = fopen("form_submissions.txt", "a");
+
+    // Write the form data to the file
+    fwrite($file, $formData);
+
+    // Close the file
+    fclose($file);
+
+    // Optionally, you can redirect the user to a thank you page
+    header("Location: thank_you.html");
+    exit();
+}
+?>
